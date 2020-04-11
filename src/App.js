@@ -11,8 +11,17 @@ function App() {
       setRepositories(response.data)
     });
   }, []);
+
   async function handleAddRepository() {
-    // TODO
+    const response = await api.post('/repositories', {
+      title: `Novo projeto ${Date.now()}`,
+      url: 'https://github.com/marcusgabrields/django-boilerplate',
+      techs: ['Django', 'Python'], 
+    });
+
+    const repository = response.data;
+
+    setRepositories([...repositories, repository]);
   }
 
   async function handleRemoveRepository(id) {
